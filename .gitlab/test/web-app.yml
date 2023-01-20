@@ -1,6 +1,7 @@
 web-app-e2e:
   stage: test
   image: cypress/browsers:node18.12.0-chrome107
+  needs: ['install']
   variables:
     CYPRESS_INSTALL_BINARY: ''
     MYSQL_DATABASE: 'cicd-database'

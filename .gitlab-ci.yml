@@ -5,8 +5,10 @@ variables:
 include:
   - local: '.gitlab/caching.yml'
   - local: '.gitlab/prepare/install.yml'
+  - local: '.gitlab/lint/lint.yml'
   - local: '.gitlab/test/web-app.yml'
 
 stages:
   - prepare
+  - lint
   - test

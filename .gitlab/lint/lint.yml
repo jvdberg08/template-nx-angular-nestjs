@@ -1,0 +1,18 @@
+lint:
+  stage: lint
+  image: node:18
+  needs: ['install']
+  cache:
+    - !reference [ .yarn_pull_cache, cache ]
+  only:
+    refs:
+      - merge_requests
+    variables:
+      - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
+  script:
+    - yarn
+    - git fetch origin $CI_MERGE_REQUEST_TARGET_BRANCH_NAME
+    - cp ./apps/api/src/environments/environment.example.ts ./apps/api/src/environments/environment.ts
+    - cp ./apps/web-app/src/environments/environment.example.ts ./apps/web-app/src/environments/environment.ts
+    - yarn lint --base origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME
+    - yarn commitlint --from origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME --verbose
