@@ -5,7 +5,10 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "lint": "nx affected:lint",
+    "format": "nx affected:lint --fix",
+    "e2e": "nx e2e web-app-e2e"
   },
   "mikro-orm": {
     "useTsNode": true,

@@ -61,7 +61,14 @@
       "unitTestRunner": "jest"
     },
     "@nrwl/angular:component": {
-      "style": "scss"
+      "style": "scss",
+      "module": "core/components/components.module.ts"
+    },
+    "@nrwl/angular:pipe": {
+      "module": "core/pipes/pipes.module.ts"
+    },
+    "@nrwl/angular:directive": {
+      "module": "core/directives/directives.module.ts"
     }
   }
 }

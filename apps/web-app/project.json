@@ -6,7 +6,9 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/web-app",
         "index": "apps/web-app/src/index.html",
@@ -14,9 +16,20 @@
         "polyfills": "apps/web-app/src/polyfills.ts",
         "tsConfig": "apps/web-app/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/web-app/src/favicon.ico", "apps/web-app/src/assets"],
-        "styles": ["apps/web-app/src/styles.scss"],
-        "scripts": []
+        "assets": [
+          "apps/web-app/src/favicon.ico",
+          "apps/web-app/src/assets"
+        ],
+        "styles": [
+          "apps/web-app/src/styles.scss"
+        ],
+        "scripts": [],
+        "buildOptimizer": false,
+        "optimization": false,
+        "vendorChunk": true,
+        "extractLicenses": false,
+        "sourceMap": true,
+        "namedChunks": true
       },
       "configurations": {
         "production": {
@@ -39,50 +52,56 @@
             }
           ],
           "outputHashing": "all"
-        },
-        "development": {
-          "buildOptimizer": false,
-          "optimization": false,
-          "vendorChunk": true,
-          "extractLicenses": false,
-          "sourceMap": true,
-          "namedChunks": true
         }
-      },
-      "defaultConfiguration": "production"
+      }
     },
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "browserTarget": "web-app:build"
+      },
       "configurations": {
         "production": {
           "browserTarget": "web-app:build:production"
-        },
-        "development": {
-          "browserTarget": "web-app:build:development"
         }
-      },
-      "defaultConfiguration": "development"
-    },
-    "extract-i18n": {
-      "executor": "@angular-devkit/build-angular:extract-i18n",
-      "options": {
-        "browserTarget": "web-app:build"
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["apps/web-app/**/*.ts", "apps/web-app/**/*.html"]
+        "lintFilePatterns": [
+          "apps/web-app/**/*.ts",
+          "apps/web-app/**/*.html"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "apps/web-app/jest.config.ts",
         "passWithNoTests": true
       }
     }
   },
-  "tags": []
+  "tags": [],
+  "generators": {
+    "@nrwl/angular:component": {
+      "path": "apps/web-app/src/app/core/components"
+    },
+    "@nrwl/angular:pipe": {
+      "path": "apps/web-app/src/app/core/pipes"
+    },
+    "@nrwl/angular:directive": {
+      "path": "apps/web-app/src/app/core/directives"
+    },
+    "@nrwl/angular:interceptors": {
+      "path": "apps/web-app/src/app/core/interceptors"
+    },
+    "@nrwl/angular:guard": {
+      "path": "apps/web-app/src/app/core/guards"
+    }
+  }
 }
