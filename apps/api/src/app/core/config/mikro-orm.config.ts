@@ -13,10 +13,10 @@ export default defineConfig({
   password: environment.database.password,
   entities: [Example],
   migrations: {
-    pathTs: './apps/api/src/app/core/database/migrations',
+    pathTs: './apps/api/src/app/database/migrations',
   },
   seeder: {
-    pathTs: './apps/api/src/app/core/database/seeders',
+    pathTs: './apps/api/src/app/database/seeders',
     defaultSeeder: 'DatabaseSeeder',
     emit: 'ts',
     glob: '*.seeder.ts',

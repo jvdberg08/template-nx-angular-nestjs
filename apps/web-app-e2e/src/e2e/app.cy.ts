@@ -1,13 +1,11 @@
-import { getGreeting } from '../support/app.po';
-
 describe('web-app', () => {
-  beforeEach(() => cy.visit('/'));
-
   it('should display welcome message', () => {
-    // Custom command example, see `../support/commands.ts` file
-    cy.login('my-email@something.com', 'myPassword');
+    cy.task('clear-database');
+    cy.task('seed-database', { seeder: 'DatabaseSeeder' });
 
-    // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains('Welcome web-app');
+    cy.visit('/');
+    for (let i = 1; i <= 10; i++) {
+      cy.contains(`id: ${i},`).should('be.visible');
+    }
   });
 });

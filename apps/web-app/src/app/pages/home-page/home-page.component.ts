@@ -17,7 +17,7 @@ export class HomePageComponent {
     private readonly examplesQuery: ExamplesQuery,
     private readonly examplesService: ExamplesService
   ) {
-    this.examplesService.get().subscribe(console.log);
+    this.examplesService.get().subscribe();
   }
 
   createExample(exampleProperty: string): void {
