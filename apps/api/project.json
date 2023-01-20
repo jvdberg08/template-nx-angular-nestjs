@@ -21,7 +21,7 @@
       },
       "configurations": {
         "production": {
-          "optimization": true,
+          "generatePackageJson": true,
           "extractLicenses": true,
           "inspect": false,
           "fileReplacements": [

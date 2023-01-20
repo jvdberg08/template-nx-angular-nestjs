@@ -4,6 +4,9 @@ module.exports = {
   rules: {
     'prettier/prettier': 'error',
   },
+  parserOptions: {
+    ecmaVersion: 9,
+  },
   overrides: [
     {
       files: ['*.ts', '*.js'],

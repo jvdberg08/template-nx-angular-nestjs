@@ -1,0 +1,36 @@
+web-app:build:
+  stage: build
+  image: docker:20.10.22
+  variables:
+    DOCKER_HOST: tcp://docker:2376
+    DOCKER_TLS_CERTDIR: "/certs"
+    DOCKER_TLS_VERIFY: 1
+    DOCKER_CERT_PATH: "$DOCKER_TLS_CERTDIR/client"
+    DOCKER_CACHE: ".docker-web-app"
+    DOCKER_CACHE_FILENAME: "$DOCKER_CACHE/image"
+  cache:
+    - !reference [ .yarn_pull_cache, cache ]
+    - key: docker-cache-web-app
+      paths:
+        - $DOCKER_CACHE
+      when: on_success
+  services:
+    - docker:20.10.22-dind
+  script:
+    - docker load -i $DOCKER_CACHE_FILENAME || true
+    - docker build . -f ./apps/web-app/Dockerfile
+      --target build
+      --tag $WEB_APP_IMAGE:build-stage
+      --cache-from $WEB_APP_IMAGE:build-stage
+    - docker build . -f ./apps/web-app/Dockerfile
+      --tag $WEB_APP_IMAGE:latest
+      --tag $WEB_APP_IMAGE:$VERSION
+      --cache-from $WEB_APP_IMAGE:build-stage
+    - mkdir $DOCKER_CACHE || true
+    - docker save -o $DOCKER_CACHE_FILENAME $WEB_APP_IMAGE:build-stage
+    - cat $GOOGLE_SERVICE_ACCOUNT_KEY | docker login -u _json_key --password-stdin https://$GOOGLE_ARTIFACT_REGISTRY
+    - docker push $WEB_APP_IMAGE:latest
+    - docker push $WEB_APP_IMAGE:$VERSION
+  rules:
+#    - if: $CI_COMMIT_BRANCH == "main"
+    - when: never

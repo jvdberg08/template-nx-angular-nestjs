@@ -1,0 +1,15 @@
+versioning:
+  stage: release
+  image: node:18
+  variables:
+    GIT_REPOSITORY: gitlab.com/<username>/<project>.git
+    MAIN_BRANCH: main
+  cache:
+    - !reference [ .yarn_pull_cache, cache ]
+  script:
+    - yarn
+    - export GITLAB_TOKEN=$SEMANTIC_RELEASE_ACCESS_TOKEN
+    - yarn semantic-release
+  rules:
+#    - if: $CI_COMMIT_BRANCH == "main"
+    - when: never

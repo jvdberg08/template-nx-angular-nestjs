@@ -23,15 +23,18 @@
         "styles": [
           "apps/web-app/src/styles.scss"
         ],
-        "scripts": [],
-        "buildOptimizer": false,
-        "optimization": false,
-        "vendorChunk": true,
-        "extractLicenses": false,
-        "sourceMap": true,
-        "namedChunks": true
+        "scripts": []
       },
+      "defaultConfiguration": "development",
       "configurations": {
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        },
         "production": {
           "budgets": [
             {
@@ -60,7 +63,11 @@
       "options": {
         "browserTarget": "web-app:build"
       },
+      "defaultConfiguration": "development",
       "configurations": {
+        "development": {
+          "browserTarget": "web-app:build:development"
+        },
         "production": {
           "browserTarget": "web-app:build:production"
         }

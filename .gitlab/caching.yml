@@ -27,3 +27,9 @@
         prefix: cypress
       paths:
         - cache/Cypress
+
+.terraform_cache:
+  cache:
+    key: "${TF_ROOT}"
+    paths:
+      - ${TF_ROOT}/.terraform/

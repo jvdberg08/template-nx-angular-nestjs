@@ -1,14 +1,29 @@
 variables:
   CYPRESS_CACHE_FOLDER: '$CI_PROJECT_DIR/cache/Cypress'
   CYPRESS_INSTALL_BINARY: 0
+  GOOGLE_ARTIFACT_REGISTRY: 'europe-west4-docker.pkg.dev'
+  PROJECT_ARTIFACT_REGISTRY: '$GOOGLE_ARTIFACT_REGISTRY/example-123456/example'
+  API_IMAGE: '$PROJECT_ARTIFACT_REGISTRY/api'
+  WEB_APP_IMAGE: '$PROJECT_ARTIFACT_REGISTRY/web-app'
 
 include:
   - local: '.gitlab/caching.yml'
-  - local: '.gitlab/prepare/install.yml'
+  - local: '.gitlab/build/api.yml'
+  - local: '.gitlab/build/web-app.yml'
+  - local: '.gitlab/deploy/deploy.yml'
   - local: '.gitlab/lint/lint.yml'
+  - local: '.gitlab/prepare/install.yml'
+  - local: '.gitlab/release/release.yml'
   - local: '.gitlab/test/web-app.yml'
 
 stages:
   - prepare
+
+    # Merge Requests
   - lint
   - test
+
+    # Main branch
+  - build
+  - deploy
+  - release

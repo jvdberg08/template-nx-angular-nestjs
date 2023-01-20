@@ -3,10 +3,14 @@ install:
   image: node:18
   cache:
     - !reference [ .yarn_pull_push_cache, cache ]
-  only:
-    refs:
-      - merge_requests
-    variables:
-      - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
   script:
     - yarn
+    - export GITLAB_TOKEN=$SEMANTIC_RELEASE_ACCESS_TOKEN
+    - VERSION=$(yarn semantic-release --dry-run | grep -oP 'Release note for version \K[0-9]+\.[0-9]+\.[0-9]+')
+    - echo "VERSION=$VERSION" >> version.env
+  artifacts:
+    reports:
+      dotenv: version.env
+  rules:
+#    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"

@@ -1,0 +1,20 @@
+deploy:
+  stage: deploy
+  image: "$CI_TEMPLATE_REGISTRY_HOST/gitlab-org/terraform-images/stable:latest"
+  variables:
+    TF_ROOT: terraform
+    TF_STATE_NAME: tf_state
+    TF_INIT_FLAGS: -lockfile=readonly
+  cache:
+    - !reference [ .terraform_cache, cache ]
+  script:
+    - cd $TF_ROOT
+    - export GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_SERVICE_ACCOUNT_KEY
+    - gitlab-terraform fmt
+    - gitlab-terraform validate
+    - gitlab-terraform plan -var api_image=$API_IMAGE:$VERSION -var web_app_image=$WEB_APP_IMAGE:$VERSION
+    - gitlab-terraform plan-json -var api_image=$API_IMAGE:$VERSION -var web_app_image=$WEB_APP_IMAGE:$VERSION
+    - gitlab-terraform apply
+  rules:
+#    - if: $CI_COMMIT_BRANCH == "main"
+    - when: never
