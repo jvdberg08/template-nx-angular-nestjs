@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "postinstall": "husky install",
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
