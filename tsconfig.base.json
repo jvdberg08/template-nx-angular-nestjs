@@ -7,6 +7,11 @@
     "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "es2015",
@@ -16,6 +21,12 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {}
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
   },
   "exclude": ["node_modules", "tmp"]
 }

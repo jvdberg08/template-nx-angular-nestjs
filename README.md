@@ -3,12 +3,14 @@
 ## Included in this template
 
 - API (NestJS v9, MikroORM v5.5)
-- Web App (Angular v14, Akita v7)
+- Web-App (Angular v14, Akita v7)
 - JWT email + password authentication
 - E2E testing skeleton
-- ESLint + Prettier
+- Linting (ESLint, Prettier, Commitlint)
   - Prettier configured as ESLint rule
-  - Ran on every commit (not yet in CI/CD)
+- CI/CD for merge requests
+  - Web-App E2E tests
+  - ESLint, Prettier, Commitlint
 
 ## Installation
 
