@@ -9,7 +9,7 @@
     "test": "nx test",
     "lint": "nx affected:lint",
     "format": "nx affected:lint --fix",
-    "e2e": "nx e2e web-app-e2e"
+    "e2e": "nx e2e web-app-e2e --browser chrome"
   },
   "mikro-orm": {
     "useTsNode": true,
@@ -87,6 +87,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-simple-import-sort": "^8.0.0",
     "eslint-plugin-unused-imports": "^2.0.0",
+    "forever": "^4.0.3",
     "husky": "^8.0.1",
     "jest": "28.1.1",
     "jest-environment-jsdom": "28.1.1",

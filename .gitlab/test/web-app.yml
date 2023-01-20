@@ -1,0 +1,26 @@
+web-app-e2e:
+  stage: test
+  image: cypress/browsers:node18.12.0-chrome107
+  variables:
+    CYPRESS_INSTALL_BINARY: ''
+    MYSQL_DATABASE: 'cicd-database'
+    MYSQL_ROOT_PASSWORD: 'root'
+  cache:
+    - !reference [ .yarn_pull_cache, cache ]
+    - !reference [ .cypress_pull_push_cache, cache ]
+  services:
+    - name: mysql:8
+      alias: mysql.dev
+  only:
+    refs:
+      - merge_requests
+    variables:
+      - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
+  script:
+    - yarn
+    - yarn cypress install
+    - cp ./apps/api/src/environments/environment.cicd.ts ./apps/api/src/environments/environment.ts
+    - cp ./apps/web-app/src/environments/environment.example.ts ./apps/web-app/src/environments/environment.ts
+    - yarn build api --configuration cicd
+    - yarn forever start ./dist/apps/api/main.js
+    - yarn e2e

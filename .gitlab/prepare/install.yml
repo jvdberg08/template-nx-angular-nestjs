@@ -1,0 +1,12 @@
+install:
+  stage: prepare
+  image: node:18
+  cache:
+    - !reference [ .yarn_pull_push_cache, cache ]
+  only:
+    refs:
+      - merge_requests
+    variables:
+      - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
+  script:
+    - yarn

@@ -1,0 +1,12 @@
+variables:
+  CYPRESS_CACHE_FOLDER: '$CI_PROJECT_DIR/cache/Cypress'
+  CYPRESS_INSTALL_BINARY: 0
+
+include:
+  - local: '.gitlab/caching.yml'
+  - local: '.gitlab/prepare/install.yml'
+  - local: '.gitlab/test/web-app.yml'
+
+stages:
+  - prepare
+  - test

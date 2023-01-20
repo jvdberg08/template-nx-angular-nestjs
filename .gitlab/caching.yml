@@ -1,0 +1,29 @@
+.yarn_pull_cache:
+  cache:
+    - policy: pull
+      key:
+        files:
+          - yarn.lock
+        prefix: node_modules
+      paths:
+        - node_modules/
+
+.yarn_pull_push_cache:
+  cache:
+    - policy: pull-push
+      key:
+        files:
+          - yarn.lock
+        prefix: node_modules
+      paths:
+        - node_modules/
+
+.cypress_pull_push_cache:
+  cache:
+    - policy: pull-push
+      key:
+        files:
+          - yarn.lock
+        prefix: cypress
+      paths:
+        - cache/Cypress

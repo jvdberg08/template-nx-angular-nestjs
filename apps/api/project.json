@@ -30,6 +30,15 @@
               "with": "apps/api/src/environments/environment.prod.ts"
             }
           ]
+        },
+        "cicd": {
+          "__extends__": "production",
+          "fileReplacements": [
+            {
+              "replace": "apps/api/src/environments/environment.ts",
+              "with": "apps/api/src/environments/environment.cicd.ts"
+            }
+          ]
         }
       }
     },
@@ -41,6 +50,9 @@
       "configurations": {
         "production": {
           "buildTarget": "api:build:production"
+        },
+        "cicd": {
+          "buildTarget": "api:build:cicd"
         }
       }
     },

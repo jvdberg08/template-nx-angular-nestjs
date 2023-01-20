@@ -10,11 +10,6 @@
         "cypressConfig": "apps/web-app-e2e/cypress.config.ts",
         "devServerTarget": "web-app:serve",
         "testingType": "e2e"
-      },
-      "configurations": {
-        "production": {
-          "devServerTarget": "web-app:serve:production"
-        }
       }
     },
     "lint": {
