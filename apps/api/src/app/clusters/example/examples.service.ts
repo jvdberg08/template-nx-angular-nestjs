@@ -27,6 +27,7 @@ export class ExamplesService {
   }
 
   async delete(id: number): Promise<void> {
-    await this.exampleRepository.nativeDelete({ id });
+    const exampleRef = this.exampleRepository.getReference(id);
+    await this.exampleRepository.removeAndFlush(exampleRef);
   }
 }

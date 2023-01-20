@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
+import { AuthService } from '../../core/services/auth.service';
 import { Example } from '../../core/state/example/example.model';
 import { ExamplesQuery } from '../../core/state/example/examples.query';
 import { ExamplesService } from '../../core/state/example/examples.service';
@@ -15,7 +17,9 @@ export class HomePageComponent {
 
   constructor(
     private readonly examplesQuery: ExamplesQuery,
-    private readonly examplesService: ExamplesService
+    private readonly examplesService: ExamplesService,
+    private readonly authService: AuthService,
+    private readonly router: Router
   ) {
     this.examplesService.get().subscribe();
   }
@@ -34,5 +38,10 @@ export class HomePageComponent {
     if (this.exampleToUpdate?.id === example.id)
       this.exampleToUpdate = undefined;
     this.examplesService.delete(example.id).subscribe();
+  }
+
+  async signOut(): Promise<void> {
+    await this.router.navigate(['sign-in']);
+    this.authService.signOut();
   }
 }
