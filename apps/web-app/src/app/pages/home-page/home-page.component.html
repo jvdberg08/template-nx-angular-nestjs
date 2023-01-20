@@ -1,0 +1,24 @@
+<div style="display: flex" *ngFor="let example of examples$ | async">
+  <p>
+    {{
+      '{ id: ' +
+        example.id +
+        ', exampleProperty: ' +
+        example.exampleProperty +
+        ' }'
+    }}
+  </p>
+  <button (click)="exampleToUpdate = example">Edit</button>
+  <button (click)="deleteExample(example)">Delete</button>
+</div>
+
+<div *ngIf="exampleToUpdate">
+  <input #updateInput [ngModel]="exampleToUpdate.exampleProperty" />
+  <button (click)="updateExample(exampleToUpdate.id, updateInput.value)">
+    Update
+  </button>
+</div>
+<br />
+<br />
+<input #createInput />
+<button (click)="createExample(createInput.value)">Create</button>
